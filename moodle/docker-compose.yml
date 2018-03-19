@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - '/opt/docker/moodle/mariadb:/bitnami'
+  moodle:
+    image: 'bitnami/moodle:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/opt/docker/moodle/www:/bitnami'
+    depends_on:
+      - mariadb
