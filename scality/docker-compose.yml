@@ -1,0 +1,13 @@
+version: '2'
+services:
+ s3server:
+  image: scality/s3server # pull the latest image
+  ports:
+   - "8000:8000"
+  environment:
+    - SCALITY_SECRET_ACCESS_KEY=secretWavent
+    - SCALITY_ACCESS_KEY_ID=accessWavent
+  volumes:
+    - /var/s3data/data:/usr/src/app/localData
+    - /var/s3data/metadata:/usr/src/app/localMetadata
+    
