@@ -13,17 +13,14 @@ RUN apt-get -yq install \
 RUN apt-get -yq install \
 	php sqlite
 
-# RUN apt-get -yq install \
-# 	vim 
-
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt-get -yq install mysql-server \
+    mysql-client
 
 RUN rm -rf /var/lib/apt/lists/*  
 
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf #&& \
-    #sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
-RUN sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 
 RUN phpenmod mcrypt
 
@@ -39,6 +36,8 @@ EXPOSE 3306
 
 
 WORKDIR /var/www/html
+
+#RUN cd /var/lib && tar zcvf /root/mysql.tar.gz mysql # Old mysql restore method
 
 VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2","/var/lib/mysql/"]
 CMD ["/run.sh"]

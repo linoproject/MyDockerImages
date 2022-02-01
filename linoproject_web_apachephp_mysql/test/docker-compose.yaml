@@ -1,0 +1,9 @@
+version: '2'
+services:
+  mainsite:
+    image: linoproject/web_apachephp_mysql:2.2
+    environment:
+      - APACHE_RUN_UID=1001
+    #volumes:
+      #- /Users/user/docker/hi-interiors.com/html:/var/www/html
+      #- /Users/user/docker/mysql:/var/lib/mysql/
