@@ -13,14 +13,11 @@ RUN apt-get -yq install \
 RUN apt-get -yq install \
 	php sqlite
 
-RUN apt-get -yq install mysql-server \
-    mysql-client
 
 RUN rm -rf /var/lib/apt/lists/*  
 
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-RUN sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
 
@@ -35,12 +32,12 @@ RUN usermod -u 33 www-data
 
 EXPOSE 80
 EXPOSE 443
-EXPOSE 3306
 
 
 WORKDIR /var/www/html
 
+#RUN cd /var/lib && tar zcvf /root/mysql.tar.gz mysql # Old mysql restore method
 
-VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2","/var/lib/mysql/"]
+VOLUME ["/var/www/html", "/var/log/apache2", "/etc/apache2"]
 CMD ["/run.sh"]
 
