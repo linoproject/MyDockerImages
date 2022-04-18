@@ -1,0 +1,2 @@
+Based on examples at https://blog.dehlin.dev/docker-with-strapi-v4
+Modified by Linoproject.net
