@@ -2,7 +2,7 @@ version: "3"
 services:
   strapi:
     container_name: strapi
-    image: linoproject/mystrapi:1.0
+    image: linoproject/mystrapi:1.1
     restart: unless-stopped
     env_file: .env
     environment:

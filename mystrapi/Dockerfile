@@ -8,9 +8,14 @@ COPY ./package.json ./
 #COPY ./yarn.lock ./
 ENV PATH /opt/node_modules/.bin:$PATH
 RUN yarn config set network-timeout 600000 -g
+
 RUN yarn install
 WORKDIR /opt/app
 COPY ./ .
+## Plugin installation 
+RUN npm install @strapi/plugin-documentation
+RUN npm install strapi-plugin-entity-relationship-chart
+RUN npm install @strapi/plugin-graphql
 RUN yarn build
 
 RUN mkdir /root/appbck
@@ -22,4 +27,3 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 CMD ["/start.sh"]
-#CMD ["yarn", "develop"]
